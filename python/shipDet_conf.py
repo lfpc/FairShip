@@ -122,11 +122,13 @@ def configure_veto(yaml_file):
 
     detectorList.append(Veto)
 
-
-def configure(run, ship_geo):
+LIST_WITHOUT_MUONSHIELD = ["Muon","Ecal","Hcal","TargetTrackers","NuTauTarget","HighPrecisionTrackers",'Strawtubes',
+                 "Veto","Magnet","TargetStation","MagneticSpectrometer","EmuMagnet",'UpstreamTagger', 'TimeDet', 'NuTauMudet',]
+def configure(run, ship_geo,
+              exclusionList:list = LIST_WITHOUT_MUONSHIELD):
     # ---- for backward compatibility ----
     if not hasattr(ship_geo, "DecayVolumeMedium"):
-        ship_geo.DecayVolumeMedium == "vacuums"
+        ship_geo.DecayVolumeMedium = "vacuums"
     if not hasattr(ship_geo, "tankDesign"):
         ship_geo.tankDesign = 5
     if not hasattr(ship_geo, "muShieldGeo"):
@@ -898,9 +900,6 @@ def configure(run, ship_geo):
             )
         run.SetField(fMagField)
     #
-    exclusionList = []
-    # exclusionList = ["Muon","Ecal","Hcal","Strawtubes","TargetTrackers","NuTauTarget","HighPrecisionTrackers",\
-    #                 "Veto","Magnet","MuonShield","TargetStation","NuTauMudet","EmuMagnet", "TimeDet", "UpstreamTagger"]
 
     for x in detectorList:
         if x.GetName() in exclusionList:
