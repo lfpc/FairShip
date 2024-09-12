@@ -123,7 +123,7 @@ def configure_veto(yaml_file):
     detectorList.append(Veto)
 
 LIST_WITHOUT_MUONSHIELD = ["Muon","Ecal","Hcal","TargetTrackers","NuTauTarget","HighPrecisionTrackers",'Strawtubes',
-                 "Veto","Magnet","TargetStation","MagneticSpectrometer","EmuMagnet",'UpstreamTagger', 'TimeDet', 'NuTauMudet',]
+                 "Magnet","TargetStation","MagneticSpectrometer","EmuMagnet",'UpstreamTagger', 'TimeDet', 'NuTauMudet',]
 def configure(run, ship_geo,
               exclusionList:list = LIST_WITHOUT_MUONSHIELD):
     # ---- for backward compatibility ----
