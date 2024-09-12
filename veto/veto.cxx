@@ -1056,7 +1056,8 @@ void veto::ConstructGeometry()
     InitMedium("helium");
     InitMedium("Scintillator");
     InitMedium("steel");
-
+    InitMedium("ShipSens");
+    TGeoMedium *Sens =gGeoManager->GetMedium("ShipSens");
     gGeoManager->SetNsegments(100);
 
     vetoMed = gGeoManager->GetMedium(vetoMed_name);   //! medium of veto counter, liquid or plastic scintillator
@@ -1065,6 +1066,10 @@ void veto::ConstructGeometry()
     decayVolumeMed = gGeoManager->GetMedium(decayVolumeMed_name);   // decay volume, air/helium/vacuum
 
     TGeoVolume* tDecayVol = new TGeoVolumeAssembly("DecayVolume");
+    TGeoVolume *Tracker = gGeoManager->MakeBox("Tracker",Sens,1000.-0.01,900.-0.01,1.);
+      Tracker->SetLineColor(kMagenta-10);
+      top->AddNode(Tracker, 1, new TGeoTranslation(0, +100, fT1z));
+      AddSensitiveVolume(Tracker);
 
     TGeoVolume* seg = MakeSegments();
     tDecayVol->AddNode(seg, 1, new TGeoTranslation(0, 0, 0));
