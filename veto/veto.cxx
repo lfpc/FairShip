@@ -1066,7 +1066,7 @@ void veto::ConstructGeometry()
     decayVolumeMed = gGeoManager->GetMedium(decayVolumeMed_name);   // decay volume, air/helium/vacuum
 
     TGeoVolume* tDecayVol = new TGeoVolumeAssembly("DecayVolume");
-    TGeoVolume *Tracker = gGeoManager->MakeBox("Tracker",Sens,1000.-0.01,900.-0.01,1.);
+    TGeoVolume *Tracker = gGeoManager->MakeBox("Tracker",Sens,1000.-0.01,1000.-0.01,1.);
     Tracker->SetLineColor(kMagenta-10);
     double fT1z = -3160.;
     top->AddNode(Tracker, 1, new TGeoTranslation(0, +100, fT1z));
