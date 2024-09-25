@@ -819,6 +819,8 @@ void ShipMuonShield::ConstructGeometry()
     TGeoMedium *iron  =gGeoManager->GetMedium("iron");
     InitMedium("Concrete");
     TGeoMedium *concrete  =gGeoManager->GetMedium("Concrete");
+    InitMedium("vacuums");
+    TGeoMedium *vacuums  =gGeoManager->GetMedium("vacuums");
 
     if (fDesign >= 7 && fDesign <= 9) {
       Double_t ironField = fField*tesla;
@@ -924,13 +926,13 @@ void ShipMuonShield::ConstructGeometry()
       if (fDesign > 7) {
          auto coatBox = new TGeoBBox("coat", 10 * m - 1 * mm, 10 * m - 1 * mm, absorber_half_length);
          auto coatShape = new TGeoCompositeShape("CoatShape", "coat-absorber");
-         auto coat = new TGeoVolume("CoatVol", coatShape, concrete);
+         auto coat = new TGeoVolume("CoatVol", coatShape, vacuums);
          auto *coat_shift = new TGeoTranslation("coat_shift", 0, 0, zEndOfAbsorb + absorber_half_length + absorber_offset);
          coat_shift->RegisterYourself();
          auto *coat_shift_transition = new TGeoTranslation("coat_shift_transition", 0, 0, zEndOfAbsorb - z_transition + absorber_half_length + absorber_offset);
          coat_shift_transition->RegisterYourself();
          tShield->AddNode(coat, 1, coat_shift);
-         TGeoVolume *coatWall = gGeoManager->MakeBox("CoatWall",concrete, 10 * m - 1 * mm, 10 * m - 1 * mm, 7 * cm - 1 * mm);
+         TGeoVolume *coatWall = gGeoManager->MakeBox("CoatWall",vacuums, 10 * m - 1 * mm, 10 * m - 1 * mm, 7 * cm - 1 * mm);
          auto *coatWall_shift = new TGeoTranslation("coatWall_shift", 0, 0, zEndOfAbsorb + 2 * absorber_half_length + absorber_offset + 7 * cm);
          coatWall_shift->RegisterYourself();
          auto *coatWall_shift_transition = new TGeoTranslation("coatWall_shift_transition", 0, 0, zEndOfAbsorb - z_transition + 2 * absorber_half_length + absorber_offset + 7 * cm);
