@@ -839,8 +839,8 @@ void ShipMuonShield::ConstructGeometry()
 		 gapOut, Z);
 
       // Create TCC8 tunnel around muon shield
-      Double_t TCC8_length =  170 * m;
-      Double_t ECN3_length =  100 * m;
+      Double_t TCC8_length =  60 * m;
+      Double_t ECN3_length =  30 * m;
       Double_t TCC8_trench_length = 12 * m;
       Double_t zgap = 10 * cm;
       Double_t absorber_offset = zgap;
@@ -949,7 +949,7 @@ void ShipMuonShield::ConstructGeometry()
                                               "- coat:coat_shift_transition"
                                               "- CoatWall:coatWall_shift_transition"
       );
-      auto *Cavern = new TGeoVolume("Cavern", compRock, concrete);
+      auto *Cavern = new TGeoVolume("Cavern", compRock, vacuums);
       Cavern->SetLineColor(11);  // grey
       Cavern->SetTransparency(50);
       top->AddNode(Cavern, 1, new TGeoTranslation(0, 0, z_transition));
