@@ -839,8 +839,8 @@ void ShipMuonShield::ConstructGeometry()
 		 gapOut, Z);
 
       // Create TCC8 tunnel around muon shield
-      Double_t TCC8_length =  30 * m;
-      Double_t ECN3_length =  55 * m;
+      Double_t TCC8_length =  25 * m;
+      Double_t ECN3_length =  10 * m;
       Double_t TCC8_trench_length = 12 * m;
       Double_t zgap = 10 * cm;
       Double_t absorber_offset = zgap;
