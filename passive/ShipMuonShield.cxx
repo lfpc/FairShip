@@ -926,13 +926,13 @@ void ShipMuonShield::ConstructGeometry()
       if (fDesign > 7) {
          auto coatBox = new TGeoBBox("coat", 10 * m - 1 * mm, 10 * m - 1 * mm, absorber_half_length);
          auto coatShape = new TGeoCompositeShape("CoatShape", "coat-absorber");
-         auto coat = new TGeoVolume("CoatVol", coatShape, vacuums);
+         auto coat = new TGeoVolume("CoatVol", coatShape, concrete);//vacuums);
          auto *coat_shift = new TGeoTranslation("coat_shift", 0, 0, zEndOfAbsorb + absorber_half_length + absorber_offset);
          coat_shift->RegisterYourself();
          auto *coat_shift_transition = new TGeoTranslation("coat_shift_transition", 0, 0, zEndOfAbsorb - z_transition + absorber_half_length + absorber_offset);
          coat_shift_transition->RegisterYourself();
          tShield->AddNode(coat, 1, coat_shift);
-         TGeoVolume *coatWall = gGeoManager->MakeBox("CoatWall",vacuums, 10 * m - 1 * mm, 10 * m - 1 * mm, 7 * cm - 1 * mm);
+         TGeoVolume *coatWall = gGeoManager->MakeBox("CoatWall",concrete, 10 * m - 1 * mm, 10 * m - 1 * mm, 7 * cm - 1 * mm);
          auto *coatWall_shift = new TGeoTranslation("coatWall_shift", 0, 0, zEndOfAbsorb + 2 * absorber_half_length + absorber_offset + 7 * cm);
          coatWall_shift->RegisterYourself();
          auto *coatWall_shift_transition = new TGeoTranslation("coatWall_shift_transition", 0, 0, zEndOfAbsorb - z_transition + 2 * absorber_half_length + absorber_offset + 7 * cm);
@@ -949,7 +949,7 @@ void ShipMuonShield::ConstructGeometry()
                                               "- coat:coat_shift_transition"
                                               "- CoatWall:coatWall_shift_transition"
       );
-      auto *Cavern = new TGeoVolume("Cavern", compRock, vacuums);
+      auto *Cavern = new TGeoVolume("Cavern", compRock, concrete);//vacuums);
       Cavern->SetLineColor(11);  // grey
       Cavern->SetTransparency(50);
       top->AddNode(Cavern, 1, new TGeoTranslation(0, 0, z_transition));
